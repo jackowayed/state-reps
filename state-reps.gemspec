@@ -1,6 +1,6 @@
 spec = Gem::Specification.new do |s| 
   s.name = "state-reps"
-  s.version = "0.1.1"
+  s.version = "0.1.2"
   s.author = "Daniel Jackoway"
   s.email = "jackowayed@gmail.com"
   s.homepage = "http://github.com/jackowayed/state-reps/"
@@ -10,5 +10,4 @@ spec = Gem::Specification.new do |s|
   s.require_path = "lib"
   s.autorequire = "name"
   s.has_rdoc = true
-  s.add_dependency("dependency", ">= 0.x.x")
 end
