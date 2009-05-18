@@ -1,6 +1,6 @@
 spec = Gem::Specification.new do |s| 
-  s.name = "State Reps"
-  s.version = "0.1"
+  s.name = "state-reps"
+  s.version = "0.1.1"
   s.author = "Daniel Jackoway"
   s.email = "jackowayed@gmail.com"
   s.homepage = "http://github.com/jackowayed/state-reps/"
