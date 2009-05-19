@@ -51,4 +51,7 @@ class Person
     end
     return str.chomp;
   end
+  def to_s
+    self.writeOut
+  end
 end
