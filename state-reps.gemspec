@@ -1,7 +1,3 @@
-require 'rubygems'
-Gem::manage_gems
-require 'rake/gempackagetask'
-
 spec = Gem::Specification.new do |s| 
   s.name = "state-reps"
   s.version = "0.1.2"
