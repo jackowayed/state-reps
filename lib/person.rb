@@ -54,4 +54,10 @@ class Person
   def to_s
     self.writeOut
   end
+  def set_reps
+    r = reps self
+    self.rd = r[:rd]
+    self.sd = r[:sd]
+    r
+  end
 end
