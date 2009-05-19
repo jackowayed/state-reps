@@ -139,27 +139,38 @@ require 'uri'
     people.each{|x|
       #  x = Person.new
       #  x.zip9 = "19711-2334"
-      begin  
-        url = URI.parse("http://www.votesmart.org/search.php?search=#{x.zip9}")
-        response = Net::HTTP.get(url);
-        spot = /State House/ =~ response
-        #    puts spot
-        response = response[spot..-1] if spot
-        regex = /\d+/
-        regex =~ response
-        x.rd = $& if spot
-        spot = /State Senate/ =~response
-        response = response[spot..-1] if spot
-        regex =~ response 
-        x.sd = $& if spot
-        puts count += 1
-      rescue
-        puts $!
-        puts x.name
-      end
-   }
+      x.set_reps
+    }
         #  puts x.sd
         #  puts x.rd
    putPeople(people)
+
+  end
+
+
+  def reps(person)
+    begin
+      url = URI.parse("http://www.votesmart.org/search.php?search=#{person.zip9}")
+      response = Net::HTTP.get(url);
+      spot = /State House/ =~ response
+      #    puts spot
+      response = response[spot..-1] if spot
+      regex = /\d+/
+      regex =~ response
+      reps = {}
+      #person.rd = $& if spot
+      reps[:rd] = $& if spot
+      spot = /State Senate/ =~response
+      response = response[spot..-1] if spot
+      regex =~ response
+      reps[:sd] = $& if spot
+      #person.sd = $& if spot
+      #puts count += 1
+      reps
+    rescue
+      puts $!
+      puts person.name
+      { :rd => 'fail', :sd => 'fail' }
+    end
   end
 end
