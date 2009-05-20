@@ -60,4 +60,10 @@ class Person
     self.sd = r[:sd]
     r
   end
+  def senator
+    @senator ||= "insert senator"
+  end
+  def full_address
+    [self.address, self.city, self.state] * ', '
+  end
 end
