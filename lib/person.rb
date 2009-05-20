@@ -85,7 +85,7 @@ class Person
     r
   end
   def senator
-    @senator ||= @@senators[:sd]
+    @senator ||= @@senators[self.sd.to_i]
   end
   def senator_phone
     @senator_phone ||= senator[:phone]
