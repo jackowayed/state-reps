@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'statereps'
+require 'rubygems'
+require 'state-reps'
 include StateReps
 
 
