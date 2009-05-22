@@ -88,10 +88,10 @@ class Person
     @senator ||= @@senators[self.sd.to_i]
   end
   def senator_phone
-    @senator_phone ||= senator[:phone]
+    @senator_phone ||= senator[:phone] if senator
   end
   def senator_name
-    @senator_name ||= senator[:name]
+    @senator_name ||= senator[:name] if senator
   end
   def full_address
     [self.address, self.city, self.state] * ', '
