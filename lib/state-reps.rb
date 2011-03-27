@@ -4,9 +4,21 @@ require 'rubygems'
 require 'httparty'
 
 class StateReps
+  include HTTParty
+  base_uri 'http://api.votesmart.org/'
+
+  def initialize(api_key)
+    @api_key = api_key
+  end
+
+  def sd_and_rd(zip9)
+    five, four = zip9.split '-'
+    self.class.get "/Officials.getByZip?key=#{@api_key}&zip5=#{five}&zip4=#{four}&o=JSON"
+  end
+  
   def zip_9(person)
     begin
-      url = URI.parse("http://zip4.usps.com/zip4/zcl_0_results.jsp?visited=1&pagenumber=0&firmname=&address2=#{spacesToPlus(person[:address]).upcase}&address1=&city=#{spacesToPlus(person[:city]).upcase}&state=#{spacesToPlus(person[:state]).upcase}&urbanization=&zip5=&submit.x=0&submit.y=0&submit=Find+ZIP+Code")
+      url = URI.parse("http://zip4.usps.com/zip4/zcl_0_results.jsp?visited=1&pagenumber=0&firmname=&address2=#{person[:address].upcase}&address1=&city=#{person[:city].upcase}&state=#{person[:state].upcase}&urbanization=&zip5=&submit.x=0&submit.y=0&submit=Find+ZIP+Code".gsub(' ', '+'))
       #puts url
       response = Net::HTTP.get(url)
       
@@ -25,7 +37,7 @@ class StateReps
       zip
     rescue
       puts $!
-      puts person.name
+      puts person[:name]
     end
   end
 end
