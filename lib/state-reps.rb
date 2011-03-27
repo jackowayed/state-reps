@@ -13,7 +13,12 @@ class StateReps
 
   def sd_and_rd(zip9)
     five, four = zip9.split '-'
-    self.class.get "/Officials.getByZip?key=#{@api_key}&zip5=#{five}&zip4=#{four}&o=JSON"
+    res = self.class.get("/Officials.getByZip?key=#{@api_key}&zip5=#{five}&zip4=#{four}&o=JSON")
+    officials = res['candidateList']['candidate'].select {|c| c['officeStatus'] == 'active'}
+    senator = officials.find {|c| c['title'] == 'State Senate'}
+    rep = officials.find {|c| c['title'] == 'State House'}
+    [{senator['officeDistrictName'] => senator['firstName'] + ' ' + senator['lastName']},
+     {rep['officeDistrictName'] => rep['firstName'] + ' ' + rep['lastName']}]
   end
   
   def zip_9(person)
